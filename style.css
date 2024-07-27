@@ -53,3 +53,22 @@ html, body {
     filter: brightness(0.2);
     transform: translateZ(30px);
 }
+
+@media(max-width:768px) {
+    .list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        position: static;
+        transform: none;
+        justify-items: center;
+    }
+    .list .item:hover {
+        transform: scale(1.5); /*Increased zoom effect */
+    }
+    .list .item:has(+*:hover),
+    .list .item:has(+*+*:hover),
+    .list .item:has(+*+*+*:hover) {
+        transform: none;
+    }
+}
