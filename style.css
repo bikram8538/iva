@@ -60,7 +60,7 @@ html, body {
         grid-template-columns: repeat(3, 1fr);
         gap: 10px;
         position: static;
-        transform: none;
+        transform: flat;
         justify-items: center;
     }
     .list .item:hover {
