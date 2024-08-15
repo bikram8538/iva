@@ -1,57 +1,58 @@
-.slider {
-    width: 100%;
-    border: 1px solid red;
-    height: var(--height);
-    overflow: hidden;
-    background-image: linear-gradient(
-        to right,
-        transparent,
-        black 10% 90%,
-        transparent
-    );
-}
-.slider .list {
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0px;
     display: flex;
-    width: 100%;
-    min-width: calc(var(--width) * var(--quantity));
-    position: relative;
-    animation-delay: calc((10s / var(--quantity)) * (var(--position) -1) )!important;
+    justify-content: center;
+    align-items: center;
+    background: #503C3C;
+    background-image: linear-gradient(0deg, transparent 24%, rgb(236, 0, 0) 25%, rgb(253, 34, 34) 26%), 
+                      linear-gradient(90deg, transparent 24%, black 25%, black 26%,);
+    background-size: 50px 50px;
+    overflow: hidden;
 }
-.slider .list .item {
-    background-color: blue;
-    width: var(--width);
-    height: var(--height);
-    position: absolute;
-    left: 100%;
-    animation: autoRun 10s linear infinite;
-    transition: filter 0.5s;
-}    
-.slider.list .item img {
-    width: 100px;
-}
+.list {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transform-style: preserve-3d;
+    transform: perspective(1000px) scaleZ(3);
 
-@keyframes autoRun {
-    from{
-        left:100%;
-    } to {
-        left: calc(var(--width) * -1);
-    }
 }
-.slider:hover .item{
-    animation-play-state: paused!important;
-    filter: grayscale(1);
+.list .item {
+    transition: .5s;
+    filter: brightness(0);
+    transform-origin: center;
 }
-.slider .item:hover{
-    filter: grayscale(0);
+.list .item img {
+    width: 13.125vh;
+    height: 17.5vh;
 }
-.slider[reverse="true"] .item{
-    animation: reversePlay 10s linear infinite;
+.list .item:hover {
+    filter: brightness(1);
+    transform: translateZ(100px);
 }
-
-@keyframes reversePlay {
-    from{
-        left: calc(var(--width) * 1);
-    } to {
-        left: 100%;
-    }
+.list .item:hover +*{
+    filter: brightness(0.6);
+    transform: translateZ(80px);
+}
+.list .item:hover +*+*{
+    filter: brightness(0.4);
+    transform: translateZ(50px);
+}
+.list .item:hover +*+*+*{
+    filter: brightness(0.2);
+    transform: translateZ(30px);
+}
+.list .item:has(+ *:hover) {
+    filter: brightness(0.6);
+    transform: translateZ(80px);
+}
+.list .item:has(+ * +*:hover) {
+    filter: brightness(0.4);
+    transform: translateZ(50px);
+}
+.list .item:has(+*+*+*:hover){
+    filter: brightness(0.2);
+    transform: translateZ(30px);
 }
